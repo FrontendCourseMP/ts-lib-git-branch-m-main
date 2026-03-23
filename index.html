@@ -3,16 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ts-val</title>
+    <title>Проверка HTTP-клиента</title>
   </head>
   <body>
-    <main>
-      <section>
-        <form novalidate>
-          <label>Роганов 241-3210<input type="text" required></label>
-          <p role="alert" aria-live="assertive"></p>
-          <button type="submit">Отправить</button>
+    <main class="page">
+      <section class="card">
+        <h1 class="card__title">Ручная проверка клиента</h1>
+        <p class="card__meta">Роганов 241-3210</p>
+
+        <form class="form" id="check-form" novalidate>
+          <label class="field">
+            <span class="field__label">Сколько раз отправить</span>
+            <input
+              class="field__input"
+              id="repeat-count"
+              name="count"
+              type="number"
+              min="1"
+              max="30"
+              value="3"
+              required
+            />
+          </label>
+
+          <label class="field">
+            <span class="field__label">Метод</span>
+            <select class="field__input" id="http-method" name="method">
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+              <option value="PUT">PUT</option>
+              <option value="PATCH">PATCH</option>
+            </select>
+          </label>
+
+          <label class="field field--inline">
+            <input id="log-enabled" name="log" type="checkbox" />
+            <span class="field__label">Логировать в консоль (log: true)</span>
+          </label>
+
+          <p class="form__message" role="alert" aria-live="assertive" id="form-alert"></p>
+
+          <button class="btn" type="submit">Выполнить</button>
         </form>
+
+        <h2 class="out__title">Массив результатов</h2>
+        <pre class="out" id="results-out" aria-live="polite"></pre>
       </section>
     </main>
     <script type="module" src="/src/main.ts"></script>

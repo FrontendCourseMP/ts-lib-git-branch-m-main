@@ -3,17 +3,103 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ts-val</title>
+    <title>HTTP-клиент</title>
   </head>
   <body>
     <main>
-      <section>
-        <form novalidate>
-          <label>Имя <input type="text" required></label>
-          <p role="alert" aria-live="assertive"></p>
-          <button type="submit">Отправить</button>
-        </form>
-      </section>
+      <h1>HTTP-клиент</h1>
+      <p>
+        Ответ справа. Поле «Сколько раз» — несколько одинаковых запросов подряд (массив в
+        ответе). Консоль: F12.
+      </p>
+
+      <div class="layout">
+        <div class="layout-main">
+      <label>
+        baseUrl
+        <input
+          id="baseUrl"
+          type="text"
+          value="https://jsonplaceholder.typicode.com"
+          autocomplete="off"
+        />
+      </label>
+
+      <label>
+        Сколько раз отправить (GET / POST / PUT / PATCH)
+        <input
+          id="requestCount"
+          type="number"
+          min="1"
+          max="50"
+          value="1"
+        />
+      </label>
+
+      <div id="http-lab">
+        <section>
+          <h2>GET</h2>
+          <label>
+            путь
+            <input id="getPath" type="text" value="/posts/1" />
+          </label>
+          <button type="button" data-action="get">GET</button>
+        </section>
+
+        <section>
+          <h2>POST</h2>
+          <label>
+            путь
+            <input id="postPath" type="text" value="/posts" />
+          </label>
+          <label>
+            JSON
+            <textarea id="postBody" rows="4" spellcheck="false">{"title":"заголовок","body":"текст","userId":1}</textarea>
+          </label>
+          <button type="button" data-action="post">POST</button>
+        </section>
+
+        <section>
+          <h2>PUT</h2>
+          <label>
+            путь
+            <input id="putPath" type="text" value="/posts/1" />
+          </label>
+          <label>
+            JSON
+            <textarea id="putBody" rows="5" spellcheck="false">{"id":1,"title":"put title","body":"put body","userId":1}</textarea>
+          </label>
+          <button type="button" data-action="put">PUT</button>
+        </section>
+
+        <section>
+          <h2>Ошибки 4xx / 5xx</h2>
+          <p>404 — jsonplaceholder; 400/500 — httpbin.</p>
+          <button type="button" data-action="err404">404</button>
+          <button type="button" data-action="err400">400</button>
+          <button type="button" data-action="err500">500</button>
+        </section>
+
+        <section>
+          <h2>PATCH</h2>
+          <label>
+            путь
+            <input id="patchPath" type="text" value="/posts/1" />
+          </label>
+          <label>
+            JSON
+            <textarea id="patchBody" rows="3" spellcheck="false">{"title":"patch только заголовок"}</textarea>
+          </label>
+          <button type="button" data-action="patch">PATCH</button>
+        </section>
+      </div>
+        </div>
+
+        <aside class="layout-out" aria-label="Ответ сервера">
+          <h2>Ответ / ошибка</h2>
+          <pre id="out">—</pre>
+        </aside>
+      </div>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
